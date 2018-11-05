@@ -1,0 +1,34 @@
+<html>
+	<head>
+  	<meta charset="utf-8">
+  	<title>Database</title>
+ 	</head>
+  <body>
+    <div align="center">
+    <form action="/f" + "/result.xls/" method="POST">
+    <p><i>This program shows provides several methods to work with databases.
+	You can choose through three options. Try it!</i></p>
+    <p>Select this option if you want to display information<br>
+	about the parameters of all objects that interest you.<br>
+	You can enter one column, several columns separated by commas,<br>
+	or print all the information by typing the keyword: ALL<br>  <input name="dzen" type="radio" value="1"></p>
+    <p>Select this option if you want to display information<br>
+        about the parameters of a particular object that interest you.<br> 
+        If the object has a parameter, it will be represented as 1,<br> 
+        if it is zero or EMPTY, then zero. Information is displayed<br> 
+        on a specific object. Other requests will be ignored!<br><input name="dzen" type="radio" value="2"></p>
+    <p>Select this option if you want to display information about<br> 
+       the parameters of a particular object that interest you in<br> 
+       the form of a join line. Information is displayed for a specific<br> 
+       object, so for correct operation enter its number and<br> 
+       separator (default separator is a comma) Other requests will be ignored!<br><input name="dzen" type="radio" value="3" checked></p>
+    <p>Select this option if you want to display the parameter hashes<br> 
+       of a specific object. Information is displayed on a specific<br> 
+       object and displayed in a table. For correct work enter its number.<br> 
+       Other requests will be ignored!<br><input name="dzen" type="radio" value="4" checked></p>
+    <p>Input information here -> <input name="A" type="text" value="1"/></p>
+    <input type="submit" value="Submit"/>
+    </form>
+</div>
+</body>
+</html>
