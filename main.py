@@ -88,7 +88,7 @@ def f():
                               <html>
                                  <head>
                                     <meta charset="utf-8">
-                                    <title>Results for the second option</title>
+                                    <title>Results for the fourth option</title>
                                  </head>
                                  <body>
                                    <p><a href=/getfile/output_4.xlsx>Скачать файл в xlsx формате</a>
