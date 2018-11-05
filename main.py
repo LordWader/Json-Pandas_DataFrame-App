@@ -26,18 +26,17 @@ def f():
         df.to_csv('csv_1.csv', encoding='utf-8', index=False)
         excel_writer.save()
         return data[A].to_html() +  """
-                                                <!DOCTYPE html>
-                                                <html>
-                                                 <head>
-                                                 <meta charset="utf-8">
-                                                      <title>Result for the first option</title>
-                                                        </head>
-                                                         <body>
-                                                          <p><a href=/getfile/output_1.xlsx>Скачать файл в xlsx формате</a>
-                                                                  <a href=/getfile/csv_1.csv>Скачать файл в csv формате</a>
-                                                           </body>
-                                                    </html>
-                                                    """
+                                    <html>
+                                       <head>
+                                          <meta charset="utf-8">
+                                          <title>Result for the first option</title>
+                                       </head>
+                                       <body>
+                                         <p><a href=/getfile/output_1.xlsx>Скачать файл в xlsx формате</a>
+                                         <a href=/getfile/csv_1.csv>Скачать файл в csv формате</a>
+                                       </body>
+                                    </html>
+                                    """
     elif b == '2':
         A = map(int, request.form['A'])
         results = [[0 for i in range(44)] for j in range(44)]
@@ -52,17 +51,17 @@ def f():
         df.to_csv('csv_2.csv', encoding='utf-8', index=False)
         excel_writer.save()
         return df.to_html() + """
-                                            <html>
-                                                 <head>
-                                                 <meta charset="utf-8">
-                                                      <title>Results for the second option</title>
-                                                        </head>
-                                                         <body>
-                                                          <p><a href=/getfile/output_2.xlsx>Скачать файл в xlsx формате</a>
-                                                                  <a href=/getfile/csv_2.csv>Скачать файл в csv формате</a>
-                                                           </body>
-                                                    </html>
-                                                    """
+                              <html>
+                                 <head>
+                                    <meta charset="utf-8">
+                                    <title>Results for the second option</title>
+                                 </head>
+                                 <body>
+                                    <p><a href=/getfile/output_2.xlsx>Скачать файл в xlsx формате</a>
+                                    <a href=/getfile/csv_2.csv>Скачать файл в csv формате</a>
+                                 </body>
+                               </html>
+                               """
     elif b == '3':
         A = list(request.form['A'].split(','))
         if len(A) == 1:
@@ -70,7 +69,10 @@ def f():
         symb = A[1]    
         return str(symb.join(data[i][int(A[0])] for i in range(1, 45)))
     else:
-        A = list(map(int, request.form['A'].split(',')))
+        if request.form['A'].upper() == 'ALL':
+            A = [i for i in range(452)]
+        else:
+            A = list(map(int, request.form['A'].split(',')))
         answer = [0]*len(A)
         for i in range(len(A)):
             result = []
@@ -83,17 +85,17 @@ def f():
         df.to_csv('csv_4.csv', encoding='utf-8', index=False)
         excel_writer.save()
         return df.to_html() + """
-                                            <html>
-                                                 <head>
-                                                 <meta charset="utf-8">
-                                                      <title>Results for the second option</title>
-                                                        </head>
-                                                         <body>
-                                                          <p><a href=/getfile/output_4.xlsx>Скачать файл в xlsx формате</a>
-                                                                  <a href=/getfile/csv_4.csv>Скачать файл в csv формате</a>
-                                                           </body>
-                                                    </html>
-                                                    """
+                              <html>
+                                 <head>
+                                    <meta charset="utf-8">
+                                    <title>Results for the second option</title>
+                                 </head>
+                                 <body>
+                                   <p><a href=/getfile/output_4.xlsx>Скачать файл в xlsx формате</a>
+                                      <a href=/getfile/csv_4.csv>Скачать файл в csv формате</a>
+                                 </body>
+                               </html>
+                               """
 
 @app.route('/')
 def f0():
