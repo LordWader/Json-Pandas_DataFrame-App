@@ -31,18 +31,14 @@ def second_option(A):
     return df
 
 def fourth_option(A):
-    answer = [0]*len(A)
-    for i in range(len(A)):
-        result = []
-        for j in range(1, 45):
-            result.append(data[j][A[i]])
-        answer[i] = hashlib.md5(bencode.bencode(result)).hexdigest()
-    df = pd.DataFrame(answer)
+    df = data.iloc[A]
+    result = df.apply(lambda x: hashlib.md5(bencode.bencode(tuple(x))).hexdigest(), axis = 1)
+    result = pd.DataFrame(result, index = A)
     excel_writer = pd.ExcelWriter('output_4.xlsx')
-    df.to_excel(excel_writer, sheet_name="sheet1")
-    df.to_csv('csv_4.csv', encoding='utf-8', index=False)
+    result.to_excel(excel_writer, sheet_name="sheet1")
+    result.to_csv('csv_4.csv', encoding='utf-8', index=False)
     excel_writer.save()
-    return df
+    return result
 
 @app.route('/getfile/<name>')
 def get_output_file(name):
