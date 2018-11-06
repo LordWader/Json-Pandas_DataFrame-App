@@ -17,18 +17,22 @@ def first_option(A):
     return data[A]
 
 def second_option(A):
-    results = [[0 for i in range(44)] for j in range(44)]
+    df = data.iloc[A]
+    result = []
     for i in range(1, 45):
-        if data[i][0] != 0 and data[i][0] != 'EMPTY':
-            results[i-1][i-1] = 1
-        else:
-            results[i-1][i-1] = 0
-    df = pd.DataFrame(results)
+        current = []
+        for j in A:
+            if df[i][j] != 0 and data[i][j] != 'EMPTY':
+                current.append(1)
+            else:
+                current.append(0)
+        result.append(current)
+    result = pd.DataFrame(result, index = [i for i in range(1, 45)], columns = A)
     excel_writer = pd.ExcelWriter('output_2.xlsx')
-    df.to_excel(excel_writer, sheet_name="sheet1")
-    df.to_csv('csv_2.csv', encoding='utf-8', index=False)
+    result.to_excel(excel_writer, sheet_name="sheet1")
+    result.to_csv('csv_2.csv', encoding='utf-8', index=False)
     excel_writer.save()
-    return df
+    return result
   
 def third_option(A):
     df = data.iloc[A]
@@ -75,7 +79,7 @@ def f():
                                                     </html>
                                                     """
     elif b == '2':
-        A = map(int, request.form['A'])
+        A = list(map(int, request.form['A'].split(',')))
         return second_option(A).to_html() + """
                                             <html>
                                             <head>
