@@ -18,7 +18,7 @@ def first_option(A):
 
 def second_option(A):
     df = data.iloc[A]
-    result = []
+    result = pd.DataFrame()
     for i in range(1, 45):
         current = []
         for j in A:
@@ -26,8 +26,7 @@ def second_option(A):
                 current.append(1)
             else:
                 current.append(0)
-        result.append(current)
-    result = pd.DataFrame(result, index = [i for i in range(1, 45)], columns = A)
+        result = pd.concat([result, pd.DataFrame(current, index = A, columns = [i,])], axis = 1)
     excel_writer = pd.ExcelWriter('output_2.xlsx')
     result.to_excel(excel_writer, sheet_name="sheet1")
     result.to_csv('csv_2.csv', encoding='utf-8', index=False)
