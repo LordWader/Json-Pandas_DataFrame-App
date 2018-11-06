@@ -29,6 +29,16 @@ def second_option(A):
     df.to_csv('csv_2.csv', encoding='utf-8', index=False)
     excel_writer.save()
     return df
+  
+def third_option(A):
+    df = data.iloc[A]
+    result = df.apply(lambda x: ','.join(tuple(x)), axis = 1)
+    result = pd.DataFrame(result, index =A)
+    excel_writer = pd.ExcelWriter('output_3.xlsx')
+    df.to_excel(excel_writer, sheet_name="sheet1")
+    df.to_csv('csv_3.csv', encoding='utf-8', index=False)
+    excel_writer.save()
+    return result
 
 def fourth_option(A):
     df = data.iloc[A]
@@ -79,11 +89,19 @@ def f():
                                                   </html>
                                                 """
     elif b == '3':
-        A = list(request.form['A'].split(','))
-        if len(A) == 1:
-            return str(','.join(data[i][int(A[0])] for i in range(1, 45)))
-        symb = A[1]    
-        return str(symb.join(data[i][int(A[0])] for i in range(1, 45)))
+        A = list(map(int, request.form['A'].split(',')))
+        return third_option(A).to_html() + """
+                                             <html>
+                                                <head>
+                                                   <meta charset="utf-8">
+                                                     <title>Results for the second option</title>
+                                                  </head>
+                                                   <body>
+                                                    <p><a href=/getfile/output_2.xlsx>Скачать файл в xlsx формате</a>
+                                                    <a href=/getfile/csv_2.csv>Скачать файл в csv формате</a>
+                                                  </body>
+                                                </html>
+                                              """
     else:
         if request.form['A'].upper() == 'ALL':
             A = [i for i in range(452)]
