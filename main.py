@@ -88,18 +88,18 @@ def f():
                                                 """
     elif b == '3':
         A = list(map(int, request.form['A'].split(',')))
-        return third_option(A).to_html() + """
-                                             <html>
-                                                <head>
-                                                   <meta charset="utf-8">
-                                                     <title>Results for the second option</title>
-                                                  </head>
-                                                   <body>
-                                                    <p><a href=/getfile/output_2.xlsx>Скачать файл в xlsx формате</a>
-                                                    <a href=/getfile/csv_2.csv>Скачать файл в csv формате</a>
-                                                  </body>
-                                                </html>
-                                              """
+        return third_option(A).to_html(pd.set_option('display.max_colwidth', -1)) + """
+                                                                                      <html>
+                                                                                       <head>
+                                                                                      <meta charset="utf-8">
+                                                                                        <title>Results for the second option</title>
+                                                                                     </head>
+                                                                                      <body>
+                                                                                       <p><a href=/getfile/output_2.xlsx>Скачать файл в xlsx формате</a>
+                                                                                       <a href=/getfile/csv_2.csv>Скачать файл в csv формате</a>
+                                                                                     </body>
+                                                                                   </html>
+                                                                                 """
     else:
         if request.form['A'].upper() == 'ALL':
             A = [i for i in range(452)]
