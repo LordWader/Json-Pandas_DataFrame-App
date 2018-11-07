@@ -2,7 +2,7 @@ import pandas as pd
 from flask import Flask, render_template, send_file
 from flask import request
 import hashlib
-import bencode
+import json
 
  
 app = Flask(__name__, static_url_path='')
@@ -40,7 +40,7 @@ def third_option(A):
 
 def fourth_option(A):
     df = data.iloc[A]
-    result = df.apply(lambda x: hashlib.md5(bencode.bencode(tuple(x))).hexdigest(), axis = 1)
+    result = df.apply(lambda x: hashlib.md5(json.dumps(list(x), sort_keys=True).encode('utf-8')).hexdigest(), axis = 1)
     result = pd.DataFrame(result, index = A)
     excel_writer = pd.ExcelWriter('output_4.xlsx')
     result.to_excel(excel_writer, sheet_name="sheet1")
